@@ -1,0 +1,30 @@
+{
+        "Justiça": {
+            "name": "Justiça",
+            "image": "assets/cards/justice.png",
+            "effects": [
+                "add 1"
+            ]
+        },
+        "Discurso": {
+            "name": "Discurso",
+            "image": "assets/cards/speech.png",
+            "effects": [
+                "add 2"
+            ]
+        },
+        "Imposto": {
+            "name": "Imposto",
+            "image": "assets/cards/taxes.png",
+            "effects": [
+                "add -1"
+            ]
+        },
+        "Vacina": {
+            "name": "Vacina",
+            "image": "assets/cards/vaccine.png",
+            "effects": [
+                "add 0"
+            ]
+        }
+    }

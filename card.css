@@ -1,0 +1,12 @@
+.card {
+    display: none;
+    height: 90%;
+}
+.card img {
+    height: 100%;
+    width: auto;
+}
+
+.modal {
+    display: none;
+}
