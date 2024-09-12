@@ -2,6 +2,7 @@
 //       SETTINGS
 const playerTurn = 3;
 const playerAmount = 4;
+const maxTurnTime = 8000;
 
 const activeColor = "#3e4132";
 const disableColor = "#21221c";
@@ -21,8 +22,14 @@ const dialogueText  = document.getElementById("dialogueText");
 
 const choiceModal = document.getElementById("choice");
 const choiceText  = document.getElementById("choiceText");
+
 const option1Text = document.getElementById("option1Text");
 const option2Text = document.getElementById("option2Text");
+
+const option1 = document.getElementById("option1");
+const option2 = document.getElementById("option2");
+
+const descriptionText = document.getElementById("descriptionText")
 
 const playerDivElements = [
 	document.getElementById("p1"),
@@ -115,7 +122,7 @@ await fetch("./cards.json")
 	.catch((error) => 
 		console.error("Unable to fetch data:", error));
 
-
+let timer, choice;
 GameLoop();
 
 async function GameLoop () {
@@ -126,25 +133,37 @@ async function GameLoop () {
 	while (isGame) {
 		if (turn >= playerAmount) turn = 0;
 		playerDivElements[turn].style.backgroundColor = activeColor;
-		
+
+
 		GetRandomCard();
 		RenderCards();
 		ReloadCards();
 
 
 		console.log(`Turn: ${turn}`);
-		await sleep(4000);
 
-		actionDone = false;
+		const action = await WaitForActionTaken();
+
 		playerDivElements[turn].style.backgroundColor = disableColor;
 
 
-		turn++; i++;
-		
+		i++;
+		NextTurn();
 		UpdateStar();
 		if (i > 10) isGame=false;
 		
 	}
+}
+
+function WaitForActionTaken() {
+	return new Promise(resolve => {
+	  const interval = setInterval(() => {
+		if (actionDone == true) {
+		  clearInterval(interval);
+		  resolve();
+		}
+	  }, 100);
+	});
 }
 
 
@@ -154,12 +173,20 @@ function ReloadCards() {
 	
 	for (let card of cardElements) {
 
-		card.addEventListener("click", async () => {
+		card.addEventListener("mouseover", async () => {
+			let raw = card.className;
+			let com = raw.split(' ');
+			let cardName = com[1];
 
-			if (turn != playerTurn) return;
-			if (actionDone) return;
+			let cardObject = cards[cardName];
+			descriptionText.innerHTML = cardObject.quote;
+		});
+
+
+		card.addEventListener("click", async () => {
 			
-			actionDone = true;
+			if (actionDone) return;
+
 			let raw = card.className;
 			let com = raw.split(' ');
 			let cardName = com[1];
@@ -167,13 +194,14 @@ function ReloadCards() {
 			let cardObject = cards[cardName];
 
 			if (cardObject.type == "task") {
-
+				console.log("task")
 				await WaitChoice(cardObject);
-
+				console.log("A");
+				actionDone = true;
 			} else {
 
 				await ShowDialogue(cardObject);
-				
+				actionDone = true;
 			}
 			
 		});
@@ -185,16 +213,20 @@ function RenderCards() {
 	let df = document.createDocumentFragment();
 	for (let card of players[turn].hand) {
 		let cardElement = cardModal.cloneNode(true);
-		let cardImg = cardElement.children[0];
+		let cardTitle = cardElement.children[0];
+		let cardImg = cardElement.children[1];
 		
 		cardElement.style.display = "flex";
 		cardElement.className = `card ${card.name}`;
+		
 		cardElement.id = "";
 		
 		
 		console.log(cardImg);
 		cardImg.src = card.image;
-		cardImg.id = "";
+
+		let newTitle = card.name.replaceAll("_"," ");
+		cardTitle.innerHTML = newTitle;
 
 		handElement.appendChild(cardElement.cloneNode(true));
 		
@@ -216,7 +248,7 @@ async function GetRandomCard() {
 
 	const filtered = Object.values(cards)
 		.filter(card => card.type == cardType);
-	
+
 	let pickedCard = filtered[Math.floor(Math.random()*filtered.length)];
 	
 	players[turn].hand.push(pickedCard);
@@ -243,16 +275,76 @@ async function ShowDialogue(cardObject) {
 	}
 }
 
-async function WaitChoice(text, choice1, choice2) {
+async function NextTurn() {
+	turn++;
+	actionDone = false;
+}
+
+function UpdateChoice(c) {
+	choice = c;
+	console.log(choice);
+}
+
+async function WaitChoice(cardObject) {
+
+	let question = cardObject.question;
+	let choice1  = cardObject.choice[0];
+	let choice2  = cardObject.choice[1];
+	let messages = cardObject.messages;
+	let index;
+
 	choiceModal.style.display = "flex";
-	choiceText.innerHTML = text;
+	choiceText.innerHTML = question;
+	option1Text.innerHTML = choice1;
+	option2Text.innerHTML = choice2;
 
-	
+	option1.addEventListener("click", ()=>{UpdateChoice(choice1); index=0}, false);
+	option2.addEventListener("click", ()=>{UpdateChoice(choice2); index=1}, false);
 
+	choice="";
+	console.log("A");
+	console.log(option1);
+	await WaitForChoice();
+
+	option1.removeEventListener("click", UpdateChoice);
+	option2.removeEventListener("click", UpdateChoice);
+
+	console.log(choice + "selected");
 	choiceModal.style.display = "none";
 	choiceText.innerHTML = "";
 
+
+	//Dialogue	
+	dialogueModal.style.display = "flex";
+	dialogueText.innerHTML = messages[index];
+
+	await sleep(3000);
+
+	dialogueModal.style.display = "none";
+	dialogueText.innerHTML = "";
+
+
+	//Apply Effect
+	let effects = cardObject.effects[index];
 	
+	for (let effect of effects) {
+		let com = effect.split(' ');
+		ExecuteEffect(com);
+	}
+}
+
+
+
+function WaitForChoice() {
+	return new Promise(resolve => {
+	  const interval = setInterval(() => {
+		
+		if (choice != "") {
+		  clearInterval(interval);
+		  resolve();
+		}
+	  }, 100);
+	});
 }
 
 async function ExecuteEffect(com) {

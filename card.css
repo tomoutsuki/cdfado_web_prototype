@@ -1,11 +1,63 @@
 .card {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     height: 90%;
+    width: 6rem;
+
+    background-color:#33332b;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
+
+.card h3 {
+    overflow: hidden;
+    overflow-wrap: break-word;
+
+    font-size: 1rem;
+	font-family: "Kaisei Tokumin", serif;
+	font-weight: 700;
+	font-style: normal;
+	text-align: center;
+
+	color: #e0e0e0;
+
+    margin-bottom: 2rem;
+    max-width: 6rem;
+}
+
 .card img {
-    height: 100%;
-    width: auto;
+    width: 3rem;
+    height: 3rem;
 }
+
+.card div {
+    position: absolute;
+    margin-top: 2rem;
+    height: 10rem;
+    width: 18rem;
+    margin-top: 5rem;
+
+    background-color: #20200f;
+
+    font-size: 0.7rem;
+	font-family: "Kaisei Tokumin", serif;
+	font-weight: 400;
+    line-height: 1rem;
+	font-style: normal;
+	text-align: justify;
+
+	color: #e0e0e0;
+
+   
+}
+
+.card:hover + .card div {
+    display: block;
+    color: red;
+  }
 
 .modal {
     display: none;

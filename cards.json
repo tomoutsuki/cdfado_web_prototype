@@ -4,170 +4,193 @@
 	
 		"name": "Distribuição_de_Medicamentos",
 		"type": "task",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/task.png",
 		
 		"quote": "Você possui uma quantidade limitada de remédios contra a peste. Poderia distribuí-los de forma justa entre os necessitados.",
 		"message": "",
+		"question": "Você tem uma quantidade limitada de remédios contra a peste. Como deseja distribuí-los entre os necessitados?",
+
 		"choice": [
 			"Distribuir igualmente entre os necessitados.",
 			"Guardar uma porção maior para si mesmo."
 		],
+		"messages": [
+			"Os remédios foram distribuídos igualmente entre os necessitados. A influência e a moral do jogador aumentaram, enquanto a corrupção diminuiu.",
+			"Uma porção maior de remédios foi guardada para o próprio jogador. Sua moral aumentou, mas a corrupção cresceu também."
+		],
 		"effects": [
-			{
-				"effect1": [
-					"add influence 15",
-					"add moral 5",
-					"add corruption -1"
-				],
-				"effect2": [
-					"add influence 5",
-					"add moral 25",
-					"add corruption 1"
-				]
-			}
+			[
+				"add influence 15",
+				"add moral 5",
+				"add corruption -1"
+			],
+			[
+				"add influence 5",
+				"add moral 25",
+				"add corruption 1"
+			]
 		]
 	},
     "Assistência_aos_Doentes": {
 	
 		"name": "Assistência_aos_Doentes",
 		"type": "task",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/task.png",
 		
 		"quote": "Vários habitantes estão adoecendo rapidamente. Você se voluntaria para cuidar dos enfermos, mesmo correndo risco?",
 		"message": "",
+		"question": "Vários habitantes estão adoecendo rapidamente. Você se voluntaria para ajudar os enfermos ou se protege evitando o contato?",
+
 		"choice": [
 			"Ajudar os doentes",
 			"Proteger-se e evitar contato"
 		],
+		"messages": [
+			"O jogador se voluntariou para ajudar os doentes, correndo riscos. Sua influência e moral aumentaram significativamente.",
+			"O jogador escolheu se proteger e evitou o contato com os doentes. A moral e a influência aumentaram, mas a corrupção também."
+		],
 		"effects": [
-			{
-				"effect1": [
-					"add influence 10",
-					"add moral 15"
-				],
-				"effect2": [
-					"add influence 5",
-					"add moral 20",
-                    "add corruption 1"
-				]
-			}
+			[
+				"add influence 10",
+				"add moral 15"
+			],
+			[
+				"add influence 5",
+				"add moral 20",
+				"add corruption 1"
+			]
 		]
 	},
     "Encontrou_um_Alimento_Escasso": {
 	
 		"name": "Encontrou_um_Alimento_Escasso",
 		"type": "task",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/task.png",
 		
 		"quote": "Em meio à escassez de alimentos, você encontrou um pequeno suprimento que poderia alimentar sua família por alguns dias. No entanto, seu vizinho está à beira da fome.",
 		"message": "",
+		"question": "Você encontrou um pequeno suprimento de alimentos em meio à escassez. O que você fará com o alimento?",
+
 		"choice": [
 			"Dividir o alimento com seu vizinho.",
 			"Guardar tudo para você."
 		],
-		"effects": [
-			{
-				"effect1": [
-					"add moral 10",
-					"add influence 5"
-				],
-				"effect2": [
-					"add influence 5",
-					"add moral 15",
-                    "add corruption 1"
-				]
-			}
+		"messages": [
+			"O jogador dividiu o alimento com seu vizinho. Sua moral e influência aumentaram, refletindo um ato de generosidade.",
+			"O jogador guardou todo o alimento para si. A moral e a influência cresceram, mas a corrupção também aumentou."
+		],
+		"effects": [	
+			[
+				"add moral 10",
+				"add influence 5"
+			],
+			[
+				"add influence 5",
+				"add moral 15",
+				"add corruption 1"
+			]
 		]
 	},
     "Máscara_de_Proteção": {
 	
 		"name": "Máscara_de_Proteção",
 		"type": "task",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/task.png",
 		
 		"quote": "Você conseguiu uma máscara que protege contra a infecção. Um amigo sem máscara está ficando cada vez mais doente.",
 		"message": "",
+		"question": "Você possui uma máscara de proteção, mas seu amigo está adoecendo. Você vai oferecer sua máscara ou usá-la para se proteger?",
+
 		"choice": [
 			"Dar sua máscara ao amigo.",
 			"Usar a máscara e se proteger."
 		],
-		
+		"messages": [
+			"O jogador ofereceu sua máscara de proteção ao amigo, sacrificando-se. Sua moral aumentou, mas há um risco de envenenamento.",
+			"O jogador usou a máscara e se protegeu, garantindo sua segurança. A moral e a influência aumentaram, mas a corrupção se instaurou."
+		],
 		"effects": [
-			{
-				"effect1": [
-					"add moral 15",
-					"add influence 5",
-                    "add poison 1"
-				],
-				"effect2": [
-                    "add moral 10",
-					"add influence 5",
-                    "add corruption 1"
-				]
-			}
+			[
+				"add moral 15",
+				"add influence 5",
+				"add poison 1"
+			],
+			[
+				"add moral 10",
+				"add influence 5",
+				"add corruption 1"
+			]
 		]
 	},
     "Visita_a_um_Parente_Infectado": {
 	
 		"name": "Visita_a_um_Parente_Infectado",
 		"type": "task",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/task.png",
 		
 		"quote": "Um parente próximo foi infectado pela peste e está isolado. Você tem a escolha de visitá-lo, correndo o risco de se infectar, ou se proteger e evitar o contato.",
 		"message": "",
+		"question": "Um parente próximo foi infectado e está isolado. Você decide visitá-lo para confortá-lo ou evitar o contato e se proteger?",
+
 		"choice": [
 			"Visitar o parente e confortá-lo.",
 			"Ficar seguro e evitar o contato."
 		],
+		"messages": [
+			"O jogador decidiu visitar o parente infectado, oferecendo conforto. Sua moral e influência aumentaram, mas há risco de envenenamento.",
+			"O jogador escolheu se manter seguro e evitou contato com o parente. A moral aumentou, e a influência foi levemente afetada."
+		],
 		"effects": [
-			{
-				"effect1": [
-					"add moral 5",
-					"add influence 10",
-                    "add poison 2"
-				],
-				"effect2": [
-                    "add moral 15",
-					"add influence 5"
-				]
-			}
+			[
+				"add moral 5",
+				"add influence 10",
+				"add poison 2"
+			],
+			[
+				"add moral 15",
+				"add influence 5"
+			]
 		]
 	},
     "Alquimista_Mentiroso": {
 	
 		"name": "Alquimista_Mentiroso",
 		"type": "task",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/task.png",
 		
-		"quote": "O famoso alquimista da cidade Arvid, te fez uma oferta de venda de poções afrodisíacas falsas. Arvid lhe oferece muito dinheiro, fama e liberdade de vida para você vender e prometer falsas ofertas para os moradores locais.",
+		"quote": "O famoso alquimista da cidade lhe fez uma oferta de venda de poções afrodisíacas falsas. Arvid lhe oferece muito dinheiro, fama e uma vida livre se você prometer falsas curas aos moradores locais.",
 		"message": "",
+		"question": "O alquimista da cidade fez uma oferta lucrativa, mas imoral. Você aceitará a oferta ou denunciará suas práticas fraudulentas?",
+		
 		"choice": [
 			"Aceitar a oferta sozinho",
 			"Não aceitar, denunciar aos seus colegas e os moradores"
 		],
+		"messages": [
+			"O jogador aceitou a oferta do Alquimista Mentiroso, ganhando moral, mas corrompendo seus princípios.",
+			"O jogador denunciou o Alquimista Mentiroso, mantendo sua integridade. Sua influência e moral aumentaram, e a corrupção foi reduzida."
+		],
 		"effects": [
-			{
-				"effect1": [
-					"add moral 75",
-					"add influence 2",
-                    "add corruption 1"
-				],
-				"effect2": [
-                    "add moral 5",
-					"add influence 25",
-                    "add corruption -1"
-				]
-			}
+			[
+				"add moral 75",
+				"add influence 2",
+				"add corruption 1"
+			],
+			[
+				"add moral 5",
+				"add influence 25",
+				"add corruption -1"
+			]
 		]
 	},
     "Elixir_da_Praga_Sorrateira": {
 	
 		"name": "Elixir_da_Praga_Sorrateira",
 		"type": "poison",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/poison.png",
 		
 		"quote": "Extraída do coração de uma flor venenosa, esta poção induz febres discretas e mortais que corroem lentamente a vitalidade.",
-		"message": "",
+		"message": "O Elixir da Praga Sorrateira foi consumido. Febres discretas começam a corroer a vitalidade do jogador lentamente.",
 		
 		"effects": [
             "add influence 15",
@@ -178,10 +201,10 @@
 	
 		"name": "Essência_da_Agonia",
 		"type": "poison",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/poison.png",
 		
 		"quote": "Um frasco de cor negra que, ao ser ingerido, desencadeia dores intensas e paralisantes.",
-		"message": "",
+		"message": "A Essência da Agonia foi armada contra o jogador. Fortes dores e paralisia começaram a se manifestar.",
 		
 		"effects": [
             "add influence 5",
@@ -192,10 +215,10 @@
 	
 		"name": "Poção_da_Névoa_Letárgica",
 		"type": "poison",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/poison.png",
 		
 		"quote": "Uma poção feita de ervas raras e escuras que, quando inalada, deixa os sentidos embotados e os movimentos pesados.",
-		"message": "",
+		"message": "A Poção da Névoa Letárgica foi inalada. Os sentidos do jogador se tornaram embotados e os movimentos mais pesados.",
 		
 		"effects": [
             "add influence 10",
@@ -207,10 +230,10 @@
 	
 		"name": "Poção_de_Silêncio",
 		"type": "poison",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/poison.png",
 		
 		"quote": "Criada a partir de esporos de um cogumelo encontrado no oriente, atinge principalmente a garganta e o sistema respiratório.",
-		"message": "",
+		"message": "A Poção de Silêncio foi administrada. O jogador começa a perder a voz e sua respiração se torna mais difícil.",
 		
 		"effects": [
             "add influence 10",
@@ -221,10 +244,10 @@
 	
 		"name": "Poção_dos_Amantes",
 		"type": "poison",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/poison.png",
 		
 		"quote": "Criado com ervas alucinógenas do novo continente, usadas em rituais de casamento e lua de mel, faz com que o alvo se enfatue por você e concorde com tudo que é dito por seu amante.",
-		"message": "",
+		"message": "A Poção dos Amantes foi ingerida. O alvo agora está profundamente encantado e concorda com qualquer coisa que o amante disser.",
 		
 		"effects": [
             "add influence 5",
@@ -235,10 +258,10 @@
 	
 		"name": "Fleuma_dos_Espíritos",
 		"type": "medicine",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/medicine.png",
 		
 		"quote": "Remover a peste te aproxima da razão. No entanto a um preço a se pagar.",
-		"message": "",
+		"message": "A Fleuma dos Espíritos foi aplicada. A peste está sendo removida, mas o jogador começa a sentir uma perda de moral.",
 		
 		"effects": [
             "cureall 1",
@@ -250,10 +273,10 @@
 	
 		"name": "Profilaxia",
 		"type": "medicine",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/medicine.png",
 		
 		"quote": "O melhor método de não ficar doente é prevenir a infecção de acontecer.",
-		"message": "",
+		"message": "A Profilaxia foi aplicada com sucesso. A infecção foi prevenida, mas o jogador se silencia temporariamente.",
 		
 		"effects": [
             "cureall 1",
@@ -264,10 +287,10 @@
 	
 		"name": "Quarentena",
 		"type": "medicine",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/medicine.png",
 		
 		"quote": "Para fazer com que a praga não se espalhe, o isolamento e distanciamento é uma arma muito forte. Perder a vida de poucos pode salvar a de muitos.",
-		"message": "",
+		"message": "A Quarentena foi imposta. A praga não se espalhará, mas alguns jogadores serão temporariamente silenciados para garantir o isolamento.",
 		
 		"effects": [
             "add poison -6",
@@ -279,10 +302,10 @@
 	
 		"name": "Tratamento",
 		"type": "medicine",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/medicine.png",
 		
 		"quote": "“Não piore as coisas”",
-		"message": "",
+		"message": "O Tratamento foi iniciado. O jogador começa a se curar, mas a recuperação é lenta e eles ficam temporariamente em silêncio.",
 		
 		"effects": [
             "cure choice -6",
@@ -293,10 +316,10 @@
 	
 		"name": "Vacina",
 		"type": "medicine",
-		"image": "assets/cards/example.png",
+		"image": "assets/cards/medicine.png",
 		
 		"quote": "Ao injetar a praga no corpo das pessoas elas criam defesa contra a mesma, o preço a se pagar é correr o risco de contrair a própria praga.",
-		"message": "",
+		"message": "A Vacina foi administrada. O jogador começa a desenvolver imunidade, mas corre o risco de contrair uma leve infecção.",
 		
 		"effects": [
             "poison choice 2",
