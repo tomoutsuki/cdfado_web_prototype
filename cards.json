@@ -1,30 +1,306 @@
 {
-        "Justiça": {
-            "name": "Justiça",
-            "image": "assets/cards/justice.png",
-            "effects": [
-                "add 1"
-            ]
-        },
-        "Discurso": {
-            "name": "Discurso",
-            "image": "assets/cards/speech.png",
-            "effects": [
-                "add 2"
-            ]
-        },
-        "Imposto": {
-            "name": "Imposto",
-            "image": "assets/cards/taxes.png",
-            "effects": [
-                "add -1"
-            ]
-        },
-        "Vacina": {
-            "name": "Vacina",
-            "image": "assets/cards/vaccine.png",
-            "effects": [
-                "add 0"
-            ]
-        }
-    }
+    
+	"Distribuição_de_Medicamentos": {
+	
+		"name": "Distribuição_de_Medicamentos",
+		"type": "task",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Você possui uma quantidade limitada de remédios contra a peste. Poderia distribuí-los de forma justa entre os necessitados.",
+		"message": "",
+		"choice": [
+			"Distribuir igualmente entre os necessitados.",
+			"Guardar uma porção maior para si mesmo."
+		],
+		"effects": [
+			{
+				"effect1": [
+					"add influence 15",
+					"add moral 5",
+					"add corruption -1"
+				],
+				"effect2": [
+					"add influence 5",
+					"add moral 25",
+					"add corruption 1"
+				]
+			}
+		]
+	},
+    "Assistência_aos_Doentes": {
+	
+		"name": "Assistência_aos_Doentes",
+		"type": "task",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Vários habitantes estão adoecendo rapidamente. Você se voluntaria para cuidar dos enfermos, mesmo correndo risco?",
+		"message": "",
+		"choice": [
+			"Ajudar os doentes",
+			"Proteger-se e evitar contato"
+		],
+		"effects": [
+			{
+				"effect1": [
+					"add influence 10",
+					"add moral 15"
+				],
+				"effect2": [
+					"add influence 5",
+					"add moral 20",
+                    "add corruption 1"
+				]
+			}
+		]
+	},
+    "Encontrou_um_Alimento_Escasso": {
+	
+		"name": "Encontrou_um_Alimento_Escasso",
+		"type": "task",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Em meio à escassez de alimentos, você encontrou um pequeno suprimento que poderia alimentar sua família por alguns dias. No entanto, seu vizinho está à beira da fome.",
+		"message": "",
+		"choice": [
+			"Dividir o alimento com seu vizinho.",
+			"Guardar tudo para você."
+		],
+		"effects": [
+			{
+				"effect1": [
+					"add moral 10",
+					"add influence 5"
+				],
+				"effect2": [
+					"add influence 5",
+					"add moral 15",
+                    "add corruption 1"
+				]
+			}
+		]
+	},
+    "Máscara_de_Proteção": {
+	
+		"name": "Máscara_de_Proteção",
+		"type": "task",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Você conseguiu uma máscara que protege contra a infecção. Um amigo sem máscara está ficando cada vez mais doente.",
+		"message": "",
+		"choice": [
+			"Dar sua máscara ao amigo.",
+			"Usar a máscara e se proteger."
+		],
+		
+		"effects": [
+			{
+				"effect1": [
+					"add moral 15",
+					"add influence 5",
+                    "add poison 1"
+				],
+				"effect2": [
+                    "add moral 10",
+					"add influence 5",
+                    "add corruption 1"
+				]
+			}
+		]
+	},
+    "Visita_a_um_Parente_Infectado": {
+	
+		"name": "Visita_a_um_Parente_Infectado",
+		"type": "task",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Um parente próximo foi infectado pela peste e está isolado. Você tem a escolha de visitá-lo, correndo o risco de se infectar, ou se proteger e evitar o contato.",
+		"message": "",
+		"choice": [
+			"Visitar o parente e confortá-lo.",
+			"Ficar seguro e evitar o contato."
+		],
+		"effects": [
+			{
+				"effect1": [
+					"add moral 5",
+					"add influence 10",
+                    "add poison 2"
+				],
+				"effect2": [
+                    "add moral 15",
+					"add influence 5"
+				]
+			}
+		]
+	},
+    "Alquimista_Mentiroso": {
+	
+		"name": "Alquimista_Mentiroso",
+		"type": "task",
+		"image": "assets/cards/example.png",
+		
+		"quote": "O famoso alquimista da cidade Arvid, te fez uma oferta de venda de poções afrodisíacas falsas. Arvid lhe oferece muito dinheiro, fama e liberdade de vida para você vender e prometer falsas ofertas para os moradores locais.",
+		"message": "",
+		"choice": [
+			"Aceitar a oferta sozinho",
+			"Não aceitar, denunciar aos seus colegas e os moradores"
+		],
+		"effects": [
+			{
+				"effect1": [
+					"add moral 75",
+					"add influence 2",
+                    "add corruption 1"
+				],
+				"effect2": [
+                    "add moral 5",
+					"add influence 25",
+                    "add corruption -1"
+				]
+			}
+		]
+	},
+    "Elixir_da_Praga_Sorrateira": {
+	
+		"name": "Elixir_da_Praga_Sorrateira",
+		"type": "poison",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Extraída do coração de uma flor venenosa, esta poção induz febres discretas e mortais que corroem lentamente a vitalidade.",
+		"message": "",
+		
+		"effects": [
+            "add influence 15",
+            "poison choice"
+		]
+	},
+    "Essência_da_Agonia": {
+	
+		"name": "Essência_da_Agonia",
+		"type": "poison",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Um frasco de cor negra que, ao ser ingerido, desencadeia dores intensas e paralisantes.",
+		"message": "",
+		
+		"effects": [
+            "add influence 5",
+            "silence choice 1"
+		]
+	},
+    "Poção_da_Névoa_Letárgica": {
+	
+		"name": "Poção_da_Névoa_Letárgica",
+		"type": "poison",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Uma poção feita de ervas raras e escuras que, quando inalada, deixa os sentidos embotados e os movimentos pesados.",
+		"message": "",
+		
+		"effects": [
+            "add influence 10",
+            "corrupt choice",
+            "half choice"
+		]
+	},
+    "Poção_de_Silêncio": {
+	
+		"name": "Poção_de_Silêncio",
+		"type": "poison",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Criada a partir de esporos de um cogumelo encontrado no oriente, atinge principalmente a garganta e o sistema respiratório.",
+		"message": "",
+		
+		"effects": [
+            "add influence 10",
+            "silence choice 1"
+		]
+	},
+    "Poção_dos_Amantes": {
+	
+		"name": "Poção_dos_Amantes",
+		"type": "poison",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Criado com ervas alucinógenas do novo continente, usadas em rituais de casamento e lua de mel, faz com que o alvo se enfatue por você e concorde com tudo que é dito por seu amante.",
+		"message": "",
+		
+		"effects": [
+            "add influence 5",
+            "forcevote choice"
+		]
+	},
+    "Fleuma_dos_Espíritos": {
+	
+		"name": "Fleuma_dos_Espíritos",
+		"type": "medicine",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Remover a peste te aproxima da razão. No entanto a um preço a se pagar.",
+		"message": "",
+		
+		"effects": [
+            "cureall 1",
+            "silence self 1",
+            "add moral -5"
+		]
+	},
+    "Profilaxia": {
+	
+		"name": "Profilaxia",
+		"type": "medicine",
+		"image": "assets/cards/example.png",
+		
+		"quote": "O melhor método de não ficar doente é prevenir a infecção de acontecer.",
+		"message": "",
+		
+		"effects": [
+            "cureall 1",
+            "silence self 1"
+		]
+	},
+    "Quarentena": {
+	
+		"name": "Quarentena",
+		"type": "medicine",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Para fazer com que a praga não se espalhe, o isolamento e distanciamento é uma arma muito forte. Perder a vida de poucos pode salvar a de muitos.",
+		"message": "",
+		
+		"effects": [
+            "add poison -6",
+            "add corruption -2",
+            "silence self 1"
+		]
+	},
+    "Tratamento": {
+	
+		"name": "Tratamento",
+		"type": "medicine",
+		"image": "assets/cards/example.png",
+		
+		"quote": "“Não piore as coisas”",
+		"message": "",
+		
+		"effects": [
+            "cure choice -6",
+            "silence self 2"
+		]
+	},
+    "Vacina": {
+	
+		"name": "Vacina",
+		"type": "medicine",
+		"image": "assets/cards/example.png",
+		
+		"quote": "Ao injetar a praga no corpo das pessoas elas criam defesa contra a mesma, o preço a se pagar é correr o risco de contrair a própria praga.",
+		"message": "",
+		
+		"effects": [
+            "poison choice 2",
+            "immunity choice 2"
+		]
+	}
+}

@@ -14,7 +14,15 @@ let actionDone = false;
 // =====================
 
 const handElement = document.getElementById("hand");
-const cardModal = document.getElementById("card");
+const cardModal   = document.getElementById("card");
+
+const dialogueModal = document.getElementById("dialogue");
+const dialogueText  = document.getElementById("dialogueText");
+
+const choiceModal = document.getElementById("choice");
+const choiceText  = document.getElementById("choiceText");
+const option1Text = document.getElementById("option1Text");
+const option2Text = document.getElementById("option2Text");
 
 const playerDivElements = [
 	document.getElementById("p1"),
@@ -37,35 +45,59 @@ const playerStarElements = [
 	document.getElementById("p4_star"),
 ];
 
-playerTitleElements[0].innerHTML = "Jo Soares";
+playerTitleElements[0].innerHTML = "Zé Roliço";
 playerTitleElements[1].innerHTML = "Carlinhos";
-playerTitleElements[2].innerHTML = "Belzebul";
-playerTitleElements[3].innerHTML = "Castelo Branco";
+playerTitleElements[2].innerHTML = "Capitão Pururuca";
+playerTitleElements[3].innerHTML = "Belzebul";
 
 let players = [
 	{
-		name: "Jo Soares",
-		lp: 3,
-		inf: 2,
-		hand: ["Justiça"]
+		name: "Zé Roliço",
+		role: "medic",
+		influence: 0,
+		moral: 10,
+		poison: 0,
+		corruption: 0,
+		silenceTurn: 0,
+		immunityTurn: 0,
+
+		hand: []
 	},
 	{
 		name: "Carlinhos",
-		lp: 3,
-		inf: 2,
-		hand: ["Justiça"]
+		role: "corrupt",
+		influence: 0,
+		moral: 10,
+		poison: 0,
+		corruption: 0,
+		silenceTurn: 0,
+		immunityTurn: 0,
+
+		hand: []
+	},
+	{
+		name: "Capitão Pururuca",
+		role: "innocent",
+		influence: 0,
+		moral: 10,
+		poison: 0,
+		corruption: 0,
+		silenceTurn: 0,
+		immunityTurn: 0,
+
+		hand: []
 	},
 	{
 		name: "Belzebul",
-		lp: 3,
-		inf: 2,
-		hand: ["Justiça"]
-	},
-	{
-		name: "Castelo Branco",
-		lp: 3,
-		inf: 2,
-		hand: ["Justiça","Discurso","Imposto","Imposto"]
+		role: "innocent",
+		influence: 0,
+		moral: 10,
+		poison: 0,
+		corruption: 0,
+		silenceTurn: 0,
+		immunityTurn: 0,
+
+		hand: []
 	}
 ];
 
@@ -94,6 +126,8 @@ async function GameLoop () {
 	while (isGame) {
 		if (turn >= playerAmount) turn = 0;
 		playerDivElements[turn].style.backgroundColor = activeColor;
+		
+		GetRandomCard();
 		RenderCards();
 		ReloadCards();
 
@@ -119,7 +153,9 @@ function ReloadCards() {
 	let cardElements = document.getElementsByClassName("card");
 	
 	for (let card of cardElements) {
-		card.addEventListener("click", () => {
+
+		card.addEventListener("click", async () => {
+
 			if (turn != playerTurn) return;
 			if (actionDone) return;
 			
@@ -128,15 +164,18 @@ function ReloadCards() {
 			let com = raw.split(' ');
 			let cardName = com[1];
 
-			let effects = cards[cardName].effects;
-			
-			for (let effect of effects) {
-				let com = effect.split(' ');
-				let effectName = com[0];
-				let effectAmount = com[1];
+			let cardObject = cards[cardName];
+
+			if (cardObject.type == "task") {
+
+				await WaitChoice(cardObject);
+
+			} else {
+
+				await ShowDialogue(cardObject);
 				
-				ExecuteEffect(effectName, effectAmount);
 			}
+			
 		});
 	}
 }
@@ -147,15 +186,14 @@ function RenderCards() {
 	for (let card of players[turn].hand) {
 		let cardElement = cardModal.cloneNode(true);
 		let cardImg = cardElement.children[0];
-		let cardObject = cards[card];
-
+		
 		cardElement.style.display = "flex";
-		cardElement.className = `card ${cardObject.name}`;
+		cardElement.className = `card ${card.name}`;
 		cardElement.id = "";
 		
 		
 		console.log(cardImg);
-		cardImg.src = cardObject.image;
+		cardImg.src = card.image;
 		cardImg.id = "";
 
 		handElement.appendChild(cardElement.cloneNode(true));
@@ -168,11 +206,65 @@ function EraseCards() {
 	handElement.innerHTML = '';
 }
 
-async function ExecuteEffect(name, amount) {
+async function GetRandomCard() {
+	let cardType;
+	switch (players[turn].role) {
+		case "innocent": cardType="task"; break;
+		case "corrupt" : cardType="poison"; break;
+		case "medic":    cardType="medicine"; break;
+	}
+
+	const filtered = Object.values(cards)
+		.filter(card => card.type == cardType);
+	
+	let pickedCard = filtered[Math.floor(Math.random()*filtered.length)];
+	
+	players[turn].hand.push(pickedCard);
+
+}
+
+async function ShowDialogue(cardObject) {
+
+	let text = cardObject.quote;
+
+	dialogueModal.style.display = "flex";
+	dialogueText.innerHTML = text;
+
+	await sleep(3000);
+
+	dialogueModal.style.display = "none";
+	dialogueText.innerHTML = "";
+
+	let effects = cardObject.effects;
+	
+	for (let effect of effects) {
+		let com = effect.split(' ');
+		ExecuteEffect(com);
+	}
+}
+
+async function WaitChoice(text, choice1, choice2) {
+	choiceModal.style.display = "flex";
+	choiceText.innerHTML = text;
+
+	
+
+	choiceModal.style.display = "none";
+	choiceText.innerHTML = "";
+
+	
+}
+
+async function ExecuteEffect(com) {
+	let name = com[0];
+
 	switch (name) {
 		case "add":
-			console.log(`Adicionou ${amount} de influência`);
-			players[turn].inf += parseInt(amount);
+			let parameter = com[1];
+			let amount 	  = com[2];
+
+			console.log(`Adicionou ${amount} de ${parameter}`);
+			players[turn][parameter] += parseInt(amount);
 			break;
 			
 		case "damage":
